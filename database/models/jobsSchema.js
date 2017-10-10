@@ -2,6 +2,13 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
+const jobExperienceRequiredSchema = new Schema({
+    jobExperienceDescription: {type: String},
+    jobExprerienceYearCount: {type: Number},
+    jobExprerienceMonthCount: {type: Number} 
+});
+
+
 const jobProfileSchema = new Schema({
     jobCompanyName: { type: String },
     jobType: { type: String },
@@ -9,11 +16,11 @@ const jobProfileSchema = new Schema({
     jobDescription: { type: String },
     jobCtc: { type: String },
     jobLocation: [{ type: String }],
-    jobExperienceRequired: { type: String },
+    jobExperienceRequired: { type: jobExperienceRequiredSchema },
     jobSkillsRequired: [{ type: String }],
     jobIsPremium: { type: String },
     jobCompanyAddress: { type: String },
-    jobsPositionRequired: { type: Number },
+    jobsVancancies: { type: Number },
     jobRequiredCollegeType: { type: String }
 });
 
@@ -21,7 +28,7 @@ const candidatesAppliedSchema = new Schema({
     jobIsSMSSentCandidate: { type: String },
     jobIsEmailSentCandidate: { type: String },
     jobIsEmailSentEmployer: { type: String },
-    jobCandidateId: [{ type: Schema.ObjectId, ref: "users" }]
+    jobCandidateId: { type: Schema.ObjectId, ref: "users" }
 });
 
 const employerContactedCandidatesSchema = new Schema({
@@ -32,7 +39,7 @@ const employerContactedCandidatesSchema = new Schema({
 const jobsSchema = new Schema({
 
 jobProfile: {type:jobProfileSchema},
-jobCreationOn : {type:Date},
+jobCreatedOn : {type:Date},
 jobUpdatedOn: {type:Date},
 jobExpiryDate: {type:Date},
 isJobApproved: {type:String},
@@ -40,7 +47,7 @@ jobActive:{type:String},
 jobEmployerId: {type:Schema.ObjectId, ref:"users"},
 candidatesApplied : [{type:candidatesAppliedSchema}],
 employerContactedCandidates : [{type:employerContactedCandidatesSchema}],
-testId : {type:Schema.ObjectId, ref:"tests"}
+testIds : [{type:Schema.ObjectId, ref:"tests"}]
 
 });
 
