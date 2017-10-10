@@ -4,14 +4,10 @@ const Schema = mongoose.Schema;
 const groupsSchema = new Schema({
 
     groupName: { type: String },
-    rightId: [
-        {
-            type: String
-        }
-    ],
+    rightId: [{ type: String }],
     groupActive: { type: String },
-    groupCreatedOn : {type:Date},
-    groupUpdatedOn : {type:Date}
+    groupCreatedOn: { type: Date },
+    groupUpdatedOn: { type: Date }
 
 
 });

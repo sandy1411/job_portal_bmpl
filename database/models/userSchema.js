@@ -26,7 +26,8 @@ const addressSchema = new Schema({
     landmark: { type: String },
     city: { type: String },
     pincode: { type: Number },
-    state: { type: String }
+    state: { type: String },
+    isAddressParmanent: { type: String }
 });
 
 const photoSchema = new Schema({
@@ -69,8 +70,16 @@ const candidateProjectsSchema = new Schema({
     projectLcoation: { type: String },
     projectTeamSize: { type: String },
     projectTechnologyUsed: [{ type: String }],
-    projectScore: { type: String }
+    projectScore: { type: String },
+    isCollegeOrCompanyProject: { type: String },
+    projectCollegeName: { type: String },
+    projectCompanyName: { type: String }
 });
+
+const candidateProjectsDetailsSchema = {
+    candidateProjects: [{ type: candidateProjectsSchema }],
+    candidateProjectScore: { type: Number }
+}
 
 const candidateProfileSnapshotSchema = new Schema({
     profileHeadline: { type: String },
@@ -80,18 +89,18 @@ const candidateProfileSnapshotSchema = new Schema({
 });
 
 const candidateJobPreferencesSchema = new Schema({
-    candidatePreferredJobLcoation: { type: String },
+    candidatePreferredJobLcoation: [{ type: String }],
     candidatePreferredPackage: { type: String },
     candidatePreferredJobType: { type: String }
 });
 
 const candidateWorkExpSchema = new Schema({
-    candidateWorkExpYear: { type: Number },
-    candidateWorkExpMonths: { type: Number },
+    candidateWorkExpYearsCount: { type: Number },
+    candidateWorkExpMonthsCount: { type: Number },
     candidateCompanyName: { type: String },
-    candidateProfileIncompany: { type: String },
-    candidateProfileDescriptionIncompany: { type: String },
-    candidateTechnologyUsedIncompany: { type: String },
+    candidateProfileInCompany: { type: String },
+    candidateProfileDescriptionInCompany: { type: String },
+    candidateTechnologyUsedInCompany: [{ type: String }],
     candidateJobTypeInCompany: { type: String }
 });
 
@@ -106,8 +115,7 @@ const candidateCollegeSchema = new Schema({
     candidateCollegeName: { type: String },
     candidateCollegeDegree: { type: String },
     candidateCollegePercentageCGPA: { type: String },
-    candidateCollegeGraduationYear: { type: Number },
-    candidateCollegeScore: { type: Number }
+    candidateCollegeGraduationYear: { type: Number }
 });
 
 const candidateSchoolSchema = new Schema({
@@ -116,8 +124,7 @@ const candidateSchoolSchema = new Schema({
     candidateSchoolClass: { type: String },
     candidateSchoolAffiliation: { type: String },
     candidateSchoolPercentageCGPA: { type: String },
-    candidateSchoolPassingYear: { type: Number },
-    candidateSchoolScore: { type: Number }
+    candidateSchoolPassingYear: { type: Number }
 });
 
 const candidateAdditionalProfileShowcaseSchema = new Schema({
@@ -131,50 +138,79 @@ const candidatePatentsSchema = new Schema({
 });
 
 const candidateReseachPaperSchema = new Schema({
-
     candidateResearchPaperTitle: { type: String },
     candidateRole: { type: String },
     candidateTierPublication: { type: String },
     candidateResearchPaperdescription: { type: String }
 });
 
+const candidateCollegeDetailsSchema = new Schema({
+    candidateColleges: [{ type: candidateCollegeSchema }],
+    candidateCollegeScore: { type: Number }
+});
+
+const candidateSchoolDetailsSchema = new Schema({
+    candidateSchools: [{ type: candidateSchoolSchema }],
+    candidateSchoolScore: { type: Number }
+});
+
+const candidateResumeDetailSchema = new Schema({
+    candidateResume: { type: String },
+    candidateResumeScore: { type: Number }
+});
+
+const candidatePhotoDetailSchema = new Schema({
+    candidatePhoto: { type: photoSchema },
+    candidatePhotoScore: { type: Number }
+});
+
+const candidateAadharCardNoDetailSchema = new Schema({
+    candidateAadharCardNo: { type: String },
+    candidateAadharCardScore: { type: Number }
+});
+
+const candidatePanCardNoDetailSchema = new Schema({
+    candidatePanCardNo: { type: String },
+    candidatePanCardScore: { type: Number }
+});
+
+const candidatePassportNoDetailSchema = new Schema({
+    candidatePassportNo: { type: String },
+    candidatePassportScore: { type: Number }
+})
+
 
 const candidateGeneralProfileSchema = new Schema({
-
-    candidateMaritalstatus : {type:String},
-    candidateDOB : {type:String},
-    candidateGender : {typr:String},
-    candidateAadharCardNo : {type:String},
-    candidatePanCardNo : {type:String},
-    candidatePassportNo : {type:String},
-    candidateFatherName : {type:String},
-    candidateMotherName : {type:String},
-    candidateCategory : {type:String},
-    candidateHomeTown:{type:String},
-    candidateEmail : {type:emailSchema},
-    candidateMobile :{type:mobileSchema},
-    candidateAddress: [{type:addressSchema}],
-    candidateName : {type:nameSchema},
-    candidateUsername : {type:String},
-    candidatePassword: {type:String},
-    candidateMedicalDisability : {type:candidateMedicaldisabilitySchema},
-    candidateProjects :{type:candidateProjectsSchema},
-    candidateProfileSnapshot : {type:candidateProfileSnapshotSchema},
-    candidateJobPreferences : {type:candidateJobPreferencesSchema},
-    candidateKeySkills: {type:candidateSkillSchema},
-    candidateTotalWorkExperience : {type:candidateWorkExpSchema},
-    candidateColleges : [{type:candidateCollegeSchema}],
-    candidateSchools: [{type:candidateSchoolSchema}],
-    candidateResume: {type:String},
-    candidatePhoto:{type:photoSchema},
-    candidateAdditionalProfileShowcase :[{type:candidateAdditionalProfileShowcaseSchema}],
-    candidatePatents: [{type:candidatePatentsSchema}],
-    candidateReseachPapers : [{type:candidateReseachPaperSchema}],
-    candidateWorkAuthorization : [{type:String}]
-
-
-
-
+    candidateName: { type: nameSchema },
+    candidateUsername: { type: String },
+    candidatePassword: { type: String },
+    candidateDOB: { type: String },
+    candidateGender: { typr: String },
+    candidateEmail: { type: emailSchema },
+    candidateMobile: { type: mobileSchema },
+    candidateAddresses: [{ type: addressSchema }],
+    candidateAadharCardNoDetail: { type: candidateAadharCardNoDetailSchema },
+    candidatePanCardNoDetail: { type: candidatePanCardNoDetailSchema },
+    candidatePassportNoDetail: { type: candidatePassportNoDetailSchema },
+    candidateFatherName: { type: String },
+    candidateMotherName: { type: String },
+    candidateCategory: { type: String },
+    candidateHomeTown: { type: String },
+    candidateMaritalStatus: { type: String },
+    candidateMedicalDisabilities: [{ type: candidateMedicaldisabilitySchema }],
+    candidateProjectsDetails: { type: candidateProjectsDetailsSchema },
+    candidateProfileSnapshot: { type: candidateProfileSnapshotSchema },
+    candidateJobPreference: { type: candidateJobPreferencesSchema },
+    candidateKeySkills: [{ type: candidateSkillSchema }],
+    candidateTotalWorkExperience: [{ type: candidateWorkExpSchema }],
+    candidateCollegeDetails: { type: candidateCollegeDetailsSchema },
+    candidateSchoolDetails: { type: candidateSchoolDetailsSchema },
+    candidateResumeDetail: { type: candidateResumeDetailSchema },
+    candidatePhotoDetail: { type: candidatePhotoDetailSchema },
+    candidateAdditionalProfileShowcase: [{ type: candidateAdditionalProfileShowcaseSchema }],
+    candidatePatents: [{ type: candidatePatentsSchema }],
+    candidateReseachPapers: [{ type: candidateReseachPaperSchema }],
+    candidateWorkAuthorization: [{ type: String }]
 });
 
 const employerGeneralProfileSchema = new Schema({
@@ -182,31 +218,32 @@ const employerGeneralProfileSchema = new Schema({
     employerEmail: { type: emailSchema },
     employerMobile: { type: mobileSchema },
     employerAddress: { type: addressSchema },
-    employerUserName:{ type: String },
-    employerPassword:{ type: String },
+    employerUserName: { type: String },
+    employerPassword: { type: String },
+    employerCompanyName: { type: String },
+    employerCompanyAreaOfWork: [{ type: String }],
+    employerCompanySector: { type: String },
+    employerStartupYesNo: { type: String },
+    employerCompanyFounderName: { type: String },
+    employerCompanyCoFounderName: { type: String },
     employeerCompanyContacts: [{ type: String }],
     employerCompanyOverviewDescription: { type: String },
     employerCompanyLocations: [{ type: String }],
     employerCompanyLocationHQ: { type: String },
     employerCompanyTotalOffices: { type: Number },
     employerCompanyTurnOver: { type: String },
-    employerCompanyName: { type: String },
-    employerCompanyAreaOfWork: { type: String },
-    employerCompanySector: { type: String },
-    employerStartupYesNo: { type: String },
-    employerCompanyFounderName: { type: String },
-    employerCompanyCoFounderName: { type: String },
     employerSocialConnections: { type: employerSocialConnectionSchema },
     employerCompanyEmployeeStrength: { type: Number },
     employerCompanyFoundedIn: { type: Number },
-    employerCompanyIsPremium: { type: String },
-    employerCompanyReview: { type: employerCompanyReviewSchema },
-    employerPhoto: { type: photoSchema }
+    isEmployerCompanyPremium: { type: String },
+    employerCompanyReview: [{ type: employerCompanyReviewSchema }],
+    employerPhoto: [{ type: photoSchema }]
 });
 
 const userSchema = new Schema({
     userRole: { type: String },
-    groupId: [{ type: String }],
+    //groupId: [{ type: String }],
+    groupId: [{ type: Schema.ObjectId, ref: "groups" }],
     employerGeneralProfile: { type: employerGeneralProfileSchema },
     candidateGeneralProfile: { type: candidateGeneralProfileSchema },
     candidateAppliedJobs: [{ type: Schema.ObjectId, ref: "jobs" }],

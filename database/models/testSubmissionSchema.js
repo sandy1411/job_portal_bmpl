@@ -15,8 +15,8 @@ const attemptedQuestionsSchema = new Schema({
 const submissionDetailsSchema = new Schema({
     testId: { type: Schema.ObjectId, ref: "tests" },
     testName: { type: String },
-    totalQuestions: { type: String },
-    attemptedQuestions: { type: attemptedQuestionsSchema },
+    totalQuestions: { type: Number },
+    attemptedQuestions: [{ type: attemptedQuestionsSchema }],
     correctAnswersCount: { type: Number },
     wrongAnswersCount: { type: Number },
     totalTimeTaken: { type: String },
